@@ -39,6 +39,19 @@ Korlátozások bevezetése.
 Csoportos számlák kezelése. 
 Bővíthetőség az eszközök támogatottságára.
 
+Funckionális követelmények
+bookRoom függvényt tartalmaz, amely mezői érkezés, távozás, vendég szám, és visszatér egy Hotelservice Reservation tipusú metódussal maely mezői azonosító, Szoba (Room-ban meghatározott mezőkkel)
+vendégszám, érkezési/távozási dátum, vendég ( Guest mezői alapján), fizetés.
 
+chekIn függvény tartalmaz egy érkezést, távozást ,szobaszámot, egy listát ami CheckInGuest típusú, mely elemeinek tulajdonságai név és születésidátum visszatér önmagával.
 
+buy (kifizetés a végén) függvény ami egy termékazonosítót , egy vásárlóazonosítót és egy darabszámot tartalma, majd egy HotelService interfész 
+buyProductOrService metúdusát visszaadja amely Purchase típusú, amelynek mezői id, mennyiség, termék (ProductsService-ben meghatározott mezőkkel), vásárlás dátum, egy vásárló a (Guest mezői alapján) és egy metódus
+ami visszatér a vásárló adataivel.
 
+getInvoice (kilépés) egy fügvény ami a fizetendő számlát tartalmazza, ami  egy reservationId, ami visszaad egy HotelSercise interfésznek getInvoiceForRoom metódusát amely paraméterben megkap egy reservationId-t,
+amiből elkészül a Invoice tipusú számla, amelynek két mezője van, az összesített ár és a InvoiceItem típusú items lista, melynek elemei:
+vásárló neve, termék neve, termék ára, vásárlás  időpontja.
+ 
+addProduct (kosárba rakás) függyvény ami kap egy termék nevet, egy árat,  korlátozás leírást, minimum életkort a vásárláshoz, hiba üzenetet és vissza ad egy HotelService interfész 
+addNewBillable metúdust ami egy ProductServices típusú, melynek mezői  azonosító, név, ár, korlátozás. 
