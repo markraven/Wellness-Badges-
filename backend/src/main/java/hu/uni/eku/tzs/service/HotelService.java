@@ -1,23 +1,28 @@
 package hu.uni.eku.tzs.service;
 
+import hu.uni.eku.tzs.dao.entity.ProductsServices;
+import hu.uni.eku.tzs.dao.entity.Purchase;
+import hu.uni.eku.tzs.dao.entity.Reservation;
+import hu.uni.eku.tzs.model.*;
 import io.swagger.annotations.ApiOperation;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 public interface HotelService {
 
     @ApiOperation("Creates a reservation if there's a free room for the guests")
-    Object bookRoom(Object reservationCreate);
+    Reservation bookRoom(LocalDate startDate, LocalDate endDate, int guests);
 
     @ApiOperation("Check-in to hotel")
-    Set<Object> checkIn(Object reservation);
+    Set<GuestDto> checkIn(ReservationCheckInDto reservation);
 
     @ApiOperation("A Guest purchases an item or a service")
-    Object buyProductOrService(Object buy);
+    Purchase buyProductOrService(BuyDto buyDto);
 
     @ApiOperation("Get invoice for room")
-    Object getInvoiceForRoom(Long reservationId);
+    Invoice getInvoiceForRoom(Long reservationId);
 
     @ApiOperation("Add new Product or Service")
-    Object addNewBillable(Object productOrService);
+    ProductsServices addNewBillable(ProductServiceDto productServiceDto);
 }

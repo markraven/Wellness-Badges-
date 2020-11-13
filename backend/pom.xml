@@ -32,7 +32,7 @@
     <repository>
       <id>github</id>
       <name>GitHub OWNER Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/markraven/Wellness-Badges-</url>
+      <url>https://github.com/markraven/Wellness-Badges-</url>
     </repository>
   </distributionManagement>
 
@@ -74,6 +74,12 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>${mysql.version}</version>
+    </dependency>
+    <!-- Apache commons -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.4</version>
     </dependency>
     <!-- Lombok -->
     <dependency>
@@ -168,7 +174,7 @@
                 <goal>repackage</goal>
               </goals>
               <configuration>
-                <mainClass>hu.uni.eku.tzs.App</mainClass>
+                <mainClass>hu.uni.eku.tzs.HotelApplication</mainClass>
               </configuration>
             </execution>
           </executions>

@@ -1,0 +1,14 @@
+package hu.uni.eku.tzs.dao;
+
+import hu.uni.eku.tzs.dao.entity.Guest;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Set;
+import java.util.UUID;
+
+@Repository
+public interface GuestRepository extends JpaRepository<Guest, UUID> {
+
+    Set<Guest> findAllByReservationId(Long reservationId);
+}
