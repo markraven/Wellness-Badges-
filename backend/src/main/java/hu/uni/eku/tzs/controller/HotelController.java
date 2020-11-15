@@ -5,9 +5,11 @@ import hu.uni.eku.tzs.dao.entity.Purchase;
 import hu.uni.eku.tzs.dao.entity.Reservation;
 import hu.uni.eku.tzs.model.*;
 import hu.uni.eku.tzs.service.HotelService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -17,7 +19,7 @@ public class HotelController {
     private final HotelService hotelService;
 
     @PutMapping("/book-room")
-    public Reservation bookRoom(@RequestBody ReservationCreateDto reservationCreateDto) {
+    public ReservationModel bookRoom(@RequestBody ReservationCreateDto reservationCreateDto) {
         return hotelService.bookRoom(reservationCreateDto.getArrival(), reservationCreateDto.getLeave(), reservationCreateDto.getGuests());
     }
 
@@ -39,6 +41,12 @@ public class HotelController {
     @PutMapping("/add-product-service")
     public ProductsServices addProduct(@RequestBody ProductServiceDto productServiceDto) {
         return hotelService.addNewBillable(productServiceDto);
+    }
+
+    @GetMapping("/reservations")
+    @ApiOperation("Get all reservations")
+    public List<ReservationModel> findReservations() {
+        return  hotelService.findAllReservations();
     }
 
 }

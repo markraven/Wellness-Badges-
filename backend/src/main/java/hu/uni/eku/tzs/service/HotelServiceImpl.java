@@ -27,7 +27,7 @@ public class HotelServiceImpl implements HotelService {
     private final RoomRepository roomRepository;
 
     @Override
-    public Reservation bookRoom(LocalDate startDate, LocalDate endDate, int guests) {
+    public ReservationModel bookRoom(LocalDate startDate, LocalDate endDate, int guests) {
         if(startDate.isAfter(endDate)) {
             throw new InvalidDateRangeException();
         }
@@ -43,7 +43,7 @@ public class HotelServiceImpl implements HotelService {
                 reservationRepository.save(
                         new Reservation(room, guests, startDate, endDate)
                 )
-        ).orElseThrow(NoFreeRoomException::new);
+        ).map(ReservationModel::fromEntity).orElseThrow(NoFreeRoomException::new);
     }
 
     @Override
@@ -96,6 +96,11 @@ public class HotelServiceImpl implements HotelService {
         productsServices.setPrice(productServiceDto.getPrice());
         productsServices.setRestriction(restriction);
         return productServicesRepository.save(productsServices);
+    }
+
+    @Override
+    public List<ReservationModel> findAllReservations() {
+        return reservationRepository.findAll().stream().map(ReservationModel::fromEntity).collect(Collectors.toList());
     }
 
     private Guest createGuestFromDto(CheckInGuest checkInGuest) {
