@@ -1,18 +1,19 @@
 import React from 'react';
 import './App.scss';
-import ComplexNumberRecordingForm from "./component/ComplexNumberRecordingForm";
-import ComplexNumberList from "./component/ComplexNumberList";
-
+import AddNewProductForm from "./component/AddNewProductForm";
+import BookRoomForm from "./component/BookRoomForm";
 function App() {
   return (
     <div className={["App","container"]}>
         <div className={"row"}>
             <div className={"col-md-3"}></div>
             <div className={"col-md-6"}>
-                <ComplexNumberRecordingForm/>
-                <ComplexNumberList/>
+                <AddNewProductForm/>
             </div>
-            <div className={"col-md-3"}></div>
+
+        </div>
+        <div className={"col"}>
+            <BookRoomForm/>
         </div>
     </div>
   );
