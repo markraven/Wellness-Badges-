@@ -1,5 +1,5 @@
 jest.dontMock('../ComplexNumberActions');
-import  * as actions from '../ComplexNumberActions';
+import  * as actions from '../HotelActions';
 jest.mock('axios');
 import axios from 'axios';
 jest.mock('../../dispatcher/Dispatcher')

@@ -1,5 +1,5 @@
 import React from "react";
-import * as actions from '../action/ComplexNumberActions';
+import * as actions from '../action/HotelActions';
 import ErrorMessageWell from "./ErrorMessageWell";
 class ComplexNumberRecordingForm extends React.Component{
 
