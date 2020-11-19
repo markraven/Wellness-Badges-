@@ -31,35 +31,20 @@ export const bookRoom=({arrival,guest,leave})=>{
             payload: `${err.response.status}-${err.response.statusText}: ${err.response.data.message}`
         });
     });
-
 }
 
-
-export const recordComplexNumber = ({real,imag}) =>{
-    axios.post('/hotel/buy',
-        {
-            real : real,
-            imag : imag
-        })
-        .then(() => {
-            fetchComplexNumbers();
-            dispatcher.dispatch({action : actionConstants.clearError});
-        })
-        .catch((err) => {
-            dispatcher.dispatch({
+export const checkIn = ({arrival, leave, roomNumber}) =>{
+    axios.post('/hotel/check-in',
+    {
+        arrival: arrival,
+        leave: leave,
+        roomNumber: roomNumber
+    }
+    ).catch((err) => {
+        dispatcher.dispatch(
+            {
                 action : actionConstants.showError,
                 payload: `${err.response.status}-${err.response.statusText}: ${err.response.data.message}`
             });
-            fetchComplexNumbers();
-        });
-}
-
-export const fetchComplexNumbers = () =>{
-
-    axios.get('/complex-number/').then((resp)=>{
-        dispatcher.dispatch({
-            action : actionConstants.refresh,
-            payload: resp.data
-        });
-    })
+    });
 }
