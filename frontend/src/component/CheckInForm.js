@@ -7,11 +7,11 @@ class CheckInForm extends React.Component{
     constructor(props, context) {
         super(props, context);
         this.state={
-            guestsName: [],
             guestsBirth: [],
+            guestsName: [],
             arrival:0,
             leave:0,
-            roomNumber:0
+            roomNumber:0,
         }
 
         this.formOnChange = this.formOnChange.bind(this);
@@ -36,6 +36,7 @@ class CheckInForm extends React.Component{
         this.addForm.reset();
     }
 
+
     render() {
         const {guestsName} = this.state;
         const {guestsBirth} = this.state;
@@ -45,10 +46,10 @@ class CheckInForm extends React.Component{
                     <div className={"form-group form-control-md"}>
                         <h2>Guest</h2>
                         <label htmlFor={"guestBirth"}>Date of birth</label>
-                        <input ref={(inputBirth) => {this.newItem = inputBirth}} className={"form-control"} type={"number"} id={"guestBirth"} name={"guestBirth"} required min={1900} max={new Date().getFullYear()}/>
+                        <input ref={(inputBirth) => {this.newBirth = inputBirth}} className={"form-control"} type={"number"} id={"guestBirth"} name={"guestBirth"} required min={1900} max={new Date().getFullYear()}/>
 
                         <label htmlFor={"guestName"}>Name</label>
-                        <input ref={(inputName) => {this.newBirth = inputName}} className={"form-control"} type={"text"} id={"guestName"} name={"guestName"}  required/>
+                        <input ref={(inputName) => {this.newItem = inputName}} className={"form-control"} type={"text"} id={"guestName"} name={"guestName"}  required/>
                     </div>
                     <button type="submit" className={["btn btn-secondary"]} >Add new guest</button>
                 </form>
@@ -61,24 +62,16 @@ class CheckInForm extends React.Component{
                                 <th>Name</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                                <th scope="row"></th>
-                            {
-                                guestsName.map(item => {
-                                    return(
-                                            <td key={item}>{item}</td>
-                                    )
-                                })
-                            }
-                            {
-                            guestsBirth.map(item =>{
-                                return(
-                                    <td key={item}>{item}</td>
-                                )
-                                })
-                            }
-                            </tr>
+                            <tbody>
+                                {this.state.guestsBirth.map(item =>{return(
+                                    <tr>
+                                        <th scope={"row"}>.</th>
+                                        <td key={item}>{item}</td>
+                                        {this.state.guestsName.map(item2 => {return(
+                                            <td key={item2}>{item2}</td>
+                                        )})}
+                                    </tr>
+                                )})}
                             </tbody>
                         </table>
                     </div>
