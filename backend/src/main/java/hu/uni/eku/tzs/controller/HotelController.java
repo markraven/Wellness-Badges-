@@ -1,10 +1,13 @@
 package hu.uni.eku.tzs.controller;
 
+import hu.uni.eku.tzs.controller.dto.*;
 import hu.uni.eku.tzs.dao.entity.ProductsServices;
-import hu.uni.eku.tzs.dao.entity.Purchase;
 import hu.uni.eku.tzs.dao.entity.Reservation;
 import hu.uni.eku.tzs.model.*;
+import hu.uni.eku.tzs.service.GuestService;
 import hu.uni.eku.tzs.service.HotelService;
+import hu.uni.eku.tzs.service.ProductService;
+import hu.uni.eku.tzs.service.ReservationService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,9 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class HotelController {
     private final HotelService hotelService;
+    private final GuestService guestService;
+    private final ProductService productService;
+    private final ReservationService reservationService;
 
     @ApiOperation("Creates a reservation if there's a free room for the guests")
     @PutMapping("/book-room")
@@ -32,7 +38,7 @@ public class HotelController {
 
     @ApiOperation("A Guest purchases an item or a service")
     @PostMapping("/buy")
-    public Purchase buy(@RequestBody BuyDto buyDto) {
+    public InvoiceItem buy(@RequestBody BuyDto buyDto) {
         return hotelService.buyProductOrService(buyDto);
     }
 
@@ -48,10 +54,22 @@ public class HotelController {
         return hotelService.addNewBillable(productServiceDto);
     }
 
-    @GetMapping("/reservations")
+    @ApiOperation("Get All Guests")
+    @GetMapping("/guests")
+    private List<GuestDto> getAllGuests() {
+        return guestService.getGeusts();
+    }
+
+    @ApiOperation("Get All products and services")
+    @GetMapping("/products")
+    private List<ProductsServices> getAllProducts() {
+        return productService.getAllProductsOrServices();
+    }
+
     @ApiOperation("Get all reservations")
-    public List<ReservationModel> findReservations() {
-        return  hotelService.findAllReservations();
+    @GetMapping("/reservations")
+    private List<Reservation> getAllReservations() {
+        return reservationService.getAllReservations();
     }
 
 }

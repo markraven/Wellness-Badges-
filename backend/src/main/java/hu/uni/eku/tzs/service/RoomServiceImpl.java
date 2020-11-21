@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -42,6 +44,16 @@ public class RoomServiceImpl implements RoomService {
             rooms.add(new Room(createRoomName(floors + 1, r), (int) ((Math.random() * (maxGuestPerRoom - 1)) + 1)));
         }
         roomRepository.saveAll(rooms);
+    }
+
+    @Override
+    public List<Room> getAllRooms() {
+        return roomRepository.findAll();
+    }
+
+    @Override
+    public Optional<Room> findRoomByRoomNumber(String roomNumber) {
+        return Optional.of(roomRepository.findByRoomNumber(roomNumber));
     }
 
     private String createRoomName(int floor, int roomNo) {

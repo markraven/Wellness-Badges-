@@ -1,113 +1,77 @@
 package hu.uni.eku.tzs.service;
 
-import hu.uni.eku.tzs.dao.*;
-import hu.uni.eku.tzs.dao.entity.*;
+import hu.uni.eku.tzs.controller.dto.BuyDto;
+import hu.uni.eku.tzs.controller.dto.GuestDto;
+import hu.uni.eku.tzs.controller.dto.ProductServiceDto;
+import hu.uni.eku.tzs.controller.dto.ReservationCheckInDto;
+import hu.uni.eku.tzs.dao.PurchaseRespository;
+import hu.uni.eku.tzs.dao.entity.Guest;
+import hu.uni.eku.tzs.dao.entity.ProductsServices;
+import hu.uni.eku.tzs.dao.entity.Purchase;
+import hu.uni.eku.tzs.dao.entity.Reservation;
 import hu.uni.eku.tzs.model.*;
-import hu.uni.eku.tzs.service.exceptions.*;
+import hu.uni.eku.tzs.service.exceptions.GuestNotFoundException;
+import hu.uni.eku.tzs.service.exceptions.InsufficientAgeToBuyException;
+import hu.uni.eku.tzs.service.exceptions.ProductNotFoundException;
+import hu.uni.eku.tzs.service.exceptions.ReservationNotFoundException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class HotelServiceImpl implements HotelService {
 
-    private final GuestRepository guestRepository;
-    private final ProductServicesRepository productServicesRepository;
     private final PurchaseRespository purchaseRespository;
-    private final ReservationRepository reservationRepository;
-    private final RestrictionRepository restrictionRepository;
-    private final RoomRepository roomRepository;
+    private final ProductService productService;
+    private final GuestService guestService;
+    private final ReservationService reservationService;
+    @Value("${hotel.room.person.price}")
+    private int roomPricePersonNight;
 
     @Override
     public ReservationModel bookRoom(LocalDate startDate, LocalDate endDate, int guests) {
-        if(startDate.isAfter(endDate)) {
-            throw new InvalidDateRangeException();
-        }
-
-        List<Room> allRoom = roomRepository.findAll();
-        List<Reservation> reservationsThisTime = reservationRepository.findReservedAtTime(startDate, endDate);
-        List<Room> reservedRooms = reservationsThisTime.stream().map(Reservation::getRoom).collect(Collectors.toList());
-        Optional<Room> unoccupiedRoom = allRoom.stream()
-                .filter(room -> room.getMaxGuests() >= guests)
-                .filter(room -> !reservedRooms.contains(room))
-                .findFirst();
-        return unoccupiedRoom.map(room ->
-                reservationRepository.save(
-                        new Reservation(room, guests, startDate, endDate)
-                )
-        ).map(ReservationModel::fromEntity).orElseThrow(NoFreeRoomException::new);
+        return reservationService.bookRoom(startDate, endDate, guests);
     }
 
     @Override
     public Set<GuestDto> checkIn(ReservationCheckInDto reservation) {
-        Room room = roomRepository.findByRoomNumber(reservation.getRoomNumber());
-        Reservation checkInReservation = reservationRepository.findByArriveDateAndLeaveDateAndRoom(reservation.getArrival(), reservation.getLeave(), room).orElseThrow((ReservationNotFoundException::new));
-
-        Set<Guest> guestEntities = reservation.getGuests().stream().map(this::createGuestFromDto).collect(Collectors.toSet());
-        guestEntities.stream().forEach(g -> g.setReservation(checkInReservation));
-        checkInReservation.setGuests(guestEntities);
-        reservationRepository.save(checkInReservation);
-        return guestEntities.stream().map(Guest::toGuestDto).collect(Collectors.toSet());
+        return reservationService.checkIn(reservation);
     }
 
     @Override
-    public Purchase buyProductOrService(BuyDto buyDto) {
-        ProductsServices productsService = productServicesRepository.findById(buyDto.getProductId()).orElseThrow(ProductNotFoundException::new);
-        Guest guest = guestRepository.findById(buyDto.getGuestId()).orElseThrow(GuestNotFoundException::new);
+    public InvoiceItem buyProductOrService(BuyDto buyDto) {
+        ProductsServices productsService = productService.findById(buyDto.getProductId()).orElseThrow(ProductNotFoundException::new);
+        Guest guest = guestService.findById(buyDto.getGuestId()).orElseThrow(GuestNotFoundException::new);
         int guestAge = Period.between(guest.getBornAt(), LocalDate.now()).getYears();
         if (guestAge < productsService.getRestriction().getMinimumAge()) {
             throw new InsufficientAgeToBuyException(productsService.getRestriction().getErrorMessage());
         }
-        return purchaseRespository.save(createPurchaseEntity(productsService, guest, buyDto.getAmount()));
+        return purchaseRespository.save(createPurchaseEntity(productsService, guest, buyDto.getAmount())).toInvoiceItem();
     }
 
     @Override
     public Invoice getInvoiceForRoom(Long reservationId) {
-        Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(ReservationNotFoundException::new);
-        Set<Guest> guests = guestRepository.findAllByReservationId(reservationId);
+        Reservation reservation = reservationService.findbyReservationId(reservationId).orElseThrow(ReservationNotFoundException::new);
+        Set<Guest> guests = guestService.findAllByReservationId(reservationId);
         Set<Purchase> purchases = purchaseRespository.findAllByGuestIsIn(guests);
         Set<InvoiceItem> items = purchases.stream().map(Purchase::toInvoiceItem).collect(Collectors.toSet());
+        items.add(new InvoiceItem("Room price", "Room", (int) ChronoUnit.DAYS.between(reservation.getArriveDate(), reservation.getLeaveDate()) * roomPricePersonNight * reservation.getGuestCount(), new Date()));
         int totalAmount = items.stream().mapToInt(InvoiceItem::getItemPrice).sum();
         return new Invoice(totalAmount, items);
     }
 
     @Override
     public ProductsServices addNewBillable(ProductServiceDto productServiceDto) {
-        Restriction restriction = restrictionRepository.findAll().stream()
-                .filter(restr -> restr.getDescription().equals(productServiceDto.getRestrictionDescription()))
-                .findFirst()
-                .orElseGet(() -> restrictionRepository.save(
-                        new Restriction(0,
-                                productServiceDto.getRestrictionDescription(),
-                                productServiceDto.getMinimumAge(),
-                                productServiceDto.getErrorMessage()
-                        )
-                ));
-        ProductsServices productsServices = new ProductsServices();
-        productsServices.setName(productServiceDto.getProductName());
-        productsServices.setPrice(productServiceDto.getPrice());
-        productsServices.setRestriction(restriction);
-        return productServicesRepository.save(productsServices);
-    }
-
-    @Override
-    public List<ReservationModel> findAllReservations() {
-        return reservationRepository.findAll().stream().map(ReservationModel::fromEntity).collect(Collectors.toList());
-    }
-
-    private Guest createGuestFromDto(CheckInGuest checkInGuest) {
-        Guest guest = new Guest();
-        guest.setName(checkInGuest.getName());
-        guest.setBornAt(checkInGuest.getBornAt());
-        return guestRepository.save(guest);
+        return productService.addNewBillable(productServiceDto);
     }
 
     private Purchase createPurchaseEntity(ProductsServices productsServices, Guest guest, int amount) {
