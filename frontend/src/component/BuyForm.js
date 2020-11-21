@@ -24,11 +24,11 @@ class BuyForm extends React.Component{
     }
     render() {
         return(
-            <section className={"container_custom"}>
+            <section className={"container_custom"} onLoad={()=> actions.getAllGuest()}>
                 <div className={"custom_col"}>
                     <div className={"custom_column"}>
                         <h1 className={"custom_h1"}>Select a guest</h1>
-                        <GuestList/>
+                        <GuestList />
                     </div>
 
                 </div>
@@ -39,7 +39,7 @@ class BuyForm extends React.Component{
                 <div className={"custom_col"}>
                     <form>
                         <ErrorMessageWell/>
-                        <button onClick={()=> actions.buy(this.state)}>Submit</button>
+                        <button onClick={()=> actions.getAllGuest(this.state)}>Submit</button>
                     </form>
 
                 </div>
