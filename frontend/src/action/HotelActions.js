@@ -4,7 +4,7 @@ import * as actionConstants from '../dispatcher/ComplexNumberActionConstants'
 
 ///visszaaadja az összes terméket
 export const listAllProducts=()=>{
-    axios.get('/hotel/allproduct').then((resp)=>{
+    axios.get('/hotel/products').then((resp)=>{
         dispatcher.dispatch({
             action : actionConstants.refresh,
             payload: resp.data
@@ -14,7 +14,7 @@ export const listAllProducts=()=>{
 
 //visszaadja az összes guestet
 export const getAllGuest=()=>{
-    axios.get('/hotel/getallguest').then((resp)=>{
+    axios.get('/hotel/guests').then((resp)=>{
         dispatcher.dispatch({
             action : actionConstants.refresh,
             payload: resp.data
@@ -22,7 +22,7 @@ export const getAllGuest=()=>{
     })
 }
 
-
+///buy folytatása
 ///miután lekértük az összes guestet és az összes terméket, akkor lehet a listázott termnékekből vásárolni
 export const buy=({count,guestId,productId})=>{
     axios.post('/hotel/buy',{

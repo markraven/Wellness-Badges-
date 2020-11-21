@@ -1,8 +1,8 @@
 import React from 'react';
 
-function GuestListItem({id,bornAt,name}){
+function GuestListItem({guestId,bornAt,guestName}){
     return (
-        <option>({id}, {bornAt}, {name})</option>
+        <option>({guestId}, {bornAt}, {guestName})</option>
     );
 }
 

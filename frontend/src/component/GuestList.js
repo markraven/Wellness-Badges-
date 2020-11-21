@@ -8,6 +8,7 @@ class GuestList extends React.Component{
         super(props);
         this.state = {guests : []};
         this._updateState = this._updateState.bind(this);
+
     }
 
 
@@ -26,10 +27,10 @@ class GuestList extends React.Component{
 
     render() {
         return(
-            <select onClick={()=> actions.getAllGuest()} >
-                {this.state.guests.map(({id,bornAt,name}, index)=>{
+            <select className={"custom_select"} onClick={()=> actions.getAllGuest()} >
+                {this.state.guests.map(({guestId,bornAt,guestName}, index)=>{
                     return(
-                        <GuestListItem key={index} id={id} bornAt={bornAt} name={name} />
+                        <GuestListItem key={index} guestId={guestId} bornAt={bornAt} guestName={guestName} />
                     );
                 })}
             </select>

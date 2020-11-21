@@ -3,6 +3,7 @@ import './App.scss';
 import AddNewProductForm from "./component/AddNewProductForm";
 import BookRoomForm from "./component/BookRoomForm";
 import CheckInForm from './component/CheckInForm';
+import BuyForm from "./component/BuyForm";
 
 function App() {
   return (
@@ -46,7 +47,15 @@ function App() {
           </div>
         </div>
       </div>
+
+        <div className={"row"}>
+                    <BuyForm/>
+        </div>
+
     </div>
+
+
+
   );
 }
 
