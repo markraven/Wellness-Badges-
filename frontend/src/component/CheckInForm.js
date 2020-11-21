@@ -87,7 +87,7 @@ class CheckInForm extends React.Component{
                         <input className={"form-control"} type={"date"} id={"leave"} name={"leave"} value={this.state.arrivalDate} onChange={this.formOnChange} />
                     </div>
 
-                    <label htmlFor={"RoomNumber"}>Name</label>
+                    <label htmlFor={"RoomNumber"}>Room number</label>
                     <input className={"form-control"} type={"nubmer"} id={"RoomNumber"} name={"RoomNumber"} />
                     
                     <button className={["btn btn-primary"]} onClick={()=> actions.checkIn(this.state.arrival, this.state.leave, this.state.roomNumber)}>Submit</button>
