@@ -79,16 +79,16 @@ class CheckInForm extends React.Component{
                     <ErrorMessageWell/>
                     <div className={"form-group form-control-md"}>
                         <label htmlFor={"arrival"} >Arrival date</label>
-                        <input className={"form-control"} type={"date"} id={"arrival"} name={"arrival"} value={this.state.arrivalDate} onChange={this.formOnChange} />
+                        <input className={"form-control"} type={"date"} id={"arrival"} name={"arrival"} value={this.state.arrival} onChange={this.formOnChange} />
                     </div>
 
                     <div className={"form-group form-control-md"}>
                         <label htmlFor={"leave"} >Leaving date</label>
-                        <input className={"form-control"} type={"date"} id={"leave"} name={"leave"} value={this.state.arrivalDate} onChange={this.formOnChange} />
+                        <input className={"form-control"} type={"date"} id={"leave"} name={"leave"} value={this.state.leave} onChange={this.formOnChange} />
                     </div>
 
                     <label htmlFor={"RoomNumber"}>Room number</label>
-                    <input className={"form-control"} type={"nubmer"} id={"RoomNumber"} name={"RoomNumber"} />
+                    <input className={"form-control"} type={"number"} id={"RoomNumber"} name={"RoomNumber"} />
                     
                     <button className={["btn btn-primary"]} onClick={()=> actions.checkIn(this.state.arrival, this.state.leave, this.state.roomNumber)}>Submit</button>
                 </form>
