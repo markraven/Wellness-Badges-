@@ -1,4 +1,4 @@
-package hu.uni.eku.tzs.model;
+package hu.uni.eku.tzs.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GuestDto {
+public class BuyDto {
+    private Long productId;
     private UUID guestId;
-    private String guestName;
+    private int amount;
 }

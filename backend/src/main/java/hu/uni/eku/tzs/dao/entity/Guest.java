@@ -1,6 +1,6 @@
 package hu.uni.eku.tzs.dao.entity;
 
-import hu.uni.eku.tzs.model.GuestDto;
+import hu.uni.eku.tzs.controller.dto.GuestDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -30,6 +30,6 @@ public class Guest {
     private Reservation reservation;
 
     public GuestDto toGuestDto() {
-        return new GuestDto(id, name);
+        return new GuestDto(id, name, bornAt);
     }
 }

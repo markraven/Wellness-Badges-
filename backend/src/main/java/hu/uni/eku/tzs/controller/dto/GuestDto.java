@@ -1,16 +1,17 @@
-package hu.uni.eku.tzs.model;
+package hu.uni.eku.tzs.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BuyDto {
-    private Long productId;
+public class GuestDto {
     private UUID guestId;
-    private int amount;
+    private String guestName;
+    private LocalDate bornAt;
 }

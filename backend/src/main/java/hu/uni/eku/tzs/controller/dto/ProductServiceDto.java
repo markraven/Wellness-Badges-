@@ -1,4 +1,4 @@
-package hu.uni.eku.tzs.model;
+package hu.uni.eku.tzs.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProductServiceDto {
     private String productName;
     private int price;
-    private String restrictionDescription;
-    private int minimumAge;
+    private String restDesc;
+    private int minAge;
     private String errorMessage;
 }
