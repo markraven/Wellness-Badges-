@@ -4,9 +4,7 @@ import ErrorMessageWell from "./ErrorMessageWell";
 import GuestList from "./GuestList";
 import ProductList from "./ProductList";
 
-
 class BuyForm extends React.Component{
-
 
     constructor(props, context) {
         super(props, context);
@@ -24,7 +22,7 @@ class BuyForm extends React.Component{
     }
     render() {
         return(
-            <section className={"container_custom"} onLoad={()=> actions.getAllGuest()}>
+            <section className={"container_custom"} >
                 <div className={"custom_col"}>
                     <div className={"custom_column"}>
                         <h1 className={"custom_h1"}>Select a guest</h1>
@@ -39,7 +37,7 @@ class BuyForm extends React.Component{
                 <div className={"custom_col"}>
                     <form>
                         <ErrorMessageWell/>
-                        <button onClick={()=> actions.getAllGuest(this.state)}>Submit</button>
+                        <button onClick={()=> actions.buy(this.state)}>Submit</button>
                     </form>
 
                 </div>

@@ -3,22 +3,18 @@ import {default as store} from '../store/GuestStore'
 import axios from "axios";
 class GuestList extends React.Component{
 
-
     constructor(props) {
         super(props);
         this.state = {guests : []};
         this._updateState = this._updateState.bind(this);
     }
 
-
     componentDidMount() {
             axios.get('/hotel/guests').then(res=>
             this.setState({
                 guests:res.data
             }))
-
     }
-
 
     componentWillUnmount() {
         store.removeChangeListener(this._updateState);
@@ -32,7 +28,6 @@ class GuestList extends React.Component{
         return(
             <select className={"custom_select"} >
                 {this.state.guests.map(guest=> <option>{guest.guestId}, {guest.bornAt}, {guest.guestName}</option>)}
-                )}
             </select>
         );
     }
