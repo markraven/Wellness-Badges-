@@ -1,5 +1,6 @@
-package hu.uni.eku.tzs.model;
+package hu.uni.eku.tzs.controller.dto;
 
+import hu.uni.eku.tzs.model.CheckInGuest;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservationSearchDto {
+public class ReservationCheckInDto {
     @ApiModelProperty(required = true, example = "2020-10-18")
     private LocalDate arrival;
     @ApiModelProperty(required = true, example = "2020-10-25")
