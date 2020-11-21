@@ -13,12 +13,13 @@ class ProductList extends React.Component{
     }
 
     componentDidMount() {
-        axios.get('/hotel/products').then((resp)=>{
-            dispatcher.dispatch({
-                action : actionConstants.refresh,
-                payload: resp.data
-            });
-        })
+        axios.get('/hotel/products').then(res=>
+           this.setState({
+               products:res.data
+           })
+
+        );
+
     }
 
     componentWillUnmount() {
