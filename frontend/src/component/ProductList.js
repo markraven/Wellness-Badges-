@@ -1,6 +1,7 @@
 import React from 'react';
 import {default as store} from '../store/ProductStore'
 import axios from "axios";
+import { ListViewComponent } from '@syncfusion/ej2-react-lists';
 import dispatcher from "../dispatcher/Dispatcher";
 import * as actionConstants from "../dispatcher/ComplexNumberActionConstants";
 
@@ -10,11 +11,19 @@ class ProductList extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {products : []};
-        this._updateState = this._updateState.bind(this);
+        this.listobj=null;
+        this.state = {products : [], selectedItemsValue: []};
+        this.fields = { text: "name", tooltip: "Name", id: "id"  };
+
     }
-    handleChange = (ev: SyntheticMouseEvent<>) => {
-        this.props.onChange({event: ev, index: this.props.index})
+
+
+    getSelectedItems() {
+        if (this.listobj) {
+            this.setState({
+                selectedItemsValue: this.listobj.getSelectedItems().data
+            });
+        }
     }
 
     componentDidMount() {
@@ -26,26 +35,45 @@ class ProductList extends React.Component{
 
     }
 
-    componentWillUnmount() {
-        store.removeChangeListener(this._updateState);
-    }
-
-    _updateState(){
-        this.setState({product : store._productstore});
-    }
-
+    //{product.id} {product.name} {product.price}
     render() {
-        return(
-            <ul>
-                {this.state.products.map(product =>
-                    <li onClick={this.handleChange}>{product.id} {product.name} {product.price}
-                        <div>
-                            <button type="button" className="btn btn-success">Success</button>
-                            <button type="button" className="btn btn-warning">Warning</button>
-                        </div>
-                    </li>)}
-            </ul>
-        );
+        return (
+
+            <div>
+
+                {this.state.products.map((product,i,arr) =>
+
+                    {if(arr.length-1===i){
+                        return( <ListViewComponent fields={this.fields} key={this.state.products[i].id} dataSource={this.state.products} id={"list"} showCheckBox={true} ref={scope=>{this.listobj=scope;}}>
+                        </ListViewComponent>)
+                        }
+
+                    }
+                    )
+                }
+
+            <button id="btn" onClick={this.getSelectedItems.bind(this)}>
+                Get Selected Items
+            </button>
+            <div>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <th>Text</th>
+                    </tr>
+
+                    {this.state.selectedItemsValue.map((item, index) => {
+                        return (<tr key={index}>
+                            <td>{item.id}</td>
+                            <td>{item.name}</td>
+                        </tr>);
+                    })}
+                    </tbody>
+                </table>
+            </div>
+        </div>);
+
     }
 }
 

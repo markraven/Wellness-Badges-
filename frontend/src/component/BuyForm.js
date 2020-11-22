@@ -30,10 +30,7 @@ class BuyForm extends React.Component{
                     </div>
 
                 </div>
-                <div className={"custom_col"}>
-                    <h1 className={"custom_h1"}>Select a products which yo want to buy </h1>
-                    <ProductList/>
-                </div>
+
                 <div className={"custom_col"}>
                     <form>
                         <ErrorMessageWell/>

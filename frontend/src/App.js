@@ -4,6 +4,7 @@ import AddNewProductForm from "./component/AddNewProductForm";
 import BookRoomForm from "./component/BookRoomForm";
 import CheckInForm from './component/CheckInForm';
 import BuyForm from "./component/BuyForm";
+import ProductList from "./component/ProductList";
 
 function App() {
   return (
@@ -49,7 +50,10 @@ function App() {
       </div>
 
         <div className={"row"}>
-                    <BuyForm/>
+            <div className={"custom_col"}>
+                <h1 className={"custom_h1"}>Select a products which yo want to buy </h1>
+                <ProductList/>
+            </div>
         </div>
 
     </div>
