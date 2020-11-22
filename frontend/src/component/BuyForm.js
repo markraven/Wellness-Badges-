@@ -41,6 +41,8 @@ class BuyForm extends React.Component{
                     </form>
 
                 </div>
+
+
             </section>
         );
     }

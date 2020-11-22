@@ -6,10 +6,15 @@ import * as actionConstants from "../dispatcher/ComplexNumberActionConstants";
 
 class ProductList extends React.Component{
 
+
+
     constructor(props) {
         super(props);
         this.state = {products : []};
         this._updateState = this._updateState.bind(this);
+    }
+    handleChange = (ev: SyntheticMouseEvent<>) => {
+        this.props.onChange({event: ev, index: this.props.index})
     }
 
     componentDidMount() {
@@ -17,7 +22,6 @@ class ProductList extends React.Component{
            this.setState({
                products:res.data
            })
-
         );
 
     }
@@ -33,7 +37,13 @@ class ProductList extends React.Component{
     render() {
         return(
             <ul>
-                {this.state.products.map(product => <li>{product.id} {product.name} {product.price}</li>)}
+                {this.state.products.map(product =>
+                    <li onClick={this.handleChange}>{product.id} {product.name} {product.price}
+                        <div>
+                            <button type="button" className="btn btn-success">Success</button>
+                            <button type="button" className="btn btn-warning">Warning</button>
+                        </div>
+                    </li>)}
             </ul>
         );
     }
