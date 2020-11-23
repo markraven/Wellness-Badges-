@@ -38,8 +38,6 @@ class CheckInForm extends React.Component{
 
 
     render() {
-        const {guestsName} = this.state;
-        const {guestsBirth} = this.state;
         return(
             <div>
                 <form ref={(input) => {this.addForm = input}} onSubmit={(e) => {this.addGuest(e)}}>
@@ -56,39 +54,38 @@ class CheckInForm extends React.Component{
                 <div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date of birth</th>
-                                <th>Name</th>
-                            </tr>
+                        <tr>
+                            <th>Date of birth</th>
+                            <th>Name</th>
+                        </tr>
                         </thead>
-                            <tbody>
-                                {this.state.guestsBirth.map(item =>{return(
-                                    <tr>
-                                        <th scope={"row"}>.</th>
-                                        <td key={item}>{item}</td>
-                                        {this.state.guestsName.map(item2 => {return(
-                                            <td key={item2}>{item2}</td>
-                                        )})}
-                                    </tr>
-                                )})}
-                            </tbody>
-                        </table>
+                        <tbody>
+                        {this.state.guestsBirth.map((item,maini) =>{return(
+                            <tr>
+                                <td key={item}>{item}</td>
+                                {this.state.guestsName.map((item2, i,a) => {
+                                if (maini === i) {
+                                    return (<td key={a[i]}> {item2}</td>)
+                                }})}
+                            </tr>
+                        )})}
+                        </tbody>
+                    </table>
                     </div>
                 <form>
                     <ErrorMessageWell/>
                     <div className={"form-group form-control-md"}>
                         <label htmlFor={"arrival"} >Arrival date</label>
-                        <input className={"form-control"} type={"date"} id={"arrival"} name={"arrival"} value={this.state.arrivalDate} onChange={this.formOnChange} />
+                        <input className={"form-control"} type={"date"} id={"arrival"} name={"arrival"} value={this.state.arrival} onChange={this.formOnChange} />
                     </div>
 
                     <div className={"form-group form-control-md"}>
                         <label htmlFor={"leave"} >Leaving date</label>
-                        <input className={"form-control"} type={"date"} id={"leave"} name={"leave"} value={this.state.arrivalDate} onChange={this.formOnChange} />
+                        <input className={"form-control"} type={"date"} id={"leave"} name={"leave"} value={this.state.leave} onChange={this.formOnChange} />
                     </div>
 
                     <label htmlFor={"RoomNumber"}>Room number</label>
-                    <input className={"form-control"} type={"nubmer"} id={"RoomNumber"} name={"RoomNumber"} />
+                    <input className={"form-control"} type={"number"} id={"RoomNumber"} name={"RoomNumber"} />
                     
                     <button className={["btn btn-primary"]} onClick={()=> actions.checkIn(this.state.arrival, this.state.leave, this.state.roomNumber)}>Submit</button>
                 </form>
