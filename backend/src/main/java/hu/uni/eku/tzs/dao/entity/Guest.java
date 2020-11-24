@@ -1,9 +1,7 @@
 package hu.uni.eku.tzs.dao.entity;
 
 import hu.uni.eku.tzs.controller.dto.GuestDto;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -15,6 +13,8 @@ import java.util.UUID;
 @Table
 @ToString(exclude = "reservation")
 @EqualsAndHashCode(exclude = "reservation")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Guest {
 
     @Id
