@@ -5,6 +5,7 @@ import BookRoomForm from "./component/BookRoomForm";
 import CheckInForm from './component/CheckInForm';
 import BuyForm from "./component/BuyForm";
 import ProductList from "./component/ProductList";
+import Footer from "./component/Footer";
 
 function App() {
   return (
@@ -55,11 +56,8 @@ function App() {
                 <ProductList/>
             </div>
         </div>
-
+        <Footer/>
     </div>
-
-
-
   );
 }
 
