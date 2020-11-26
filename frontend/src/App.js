@@ -50,12 +50,19 @@ function App() {
         </div>
       </div>
 
-        <div className={"row"}>
-            <div className={"custom_col"}>
-                <h1 className={"custom_h1"}>Select a products which yo want to buy </h1>
-                <ProductList/>
-            </div>
+      <div className={"row"}>
+        <div className={"col-md-12"}>
+        <div className={"card text-center bg-success h-100 "}>
+              <div className={"card-header"}>
+                <h3>Selecting buyer and item</h3>
+              </div>
+              <div className={"card-body"}>
+              <BuyForm/>
+              </div>
+              <div className={["card-footer text-muted"]}></div>
+          </div>
         </div>
+      </div>
         <Footer/>
     </div>
   );
