@@ -1,17 +1,22 @@
 import React from "react";
 import * as actions from '../action/HotelActions';
 import ErrorMessageWell from "./ErrorMessageWell";
+import axios from "axios";
+import dispatcher from "../dispatcher/Dispatcher";
+import * as actionConstants from "../dispatcher/ComplexNumberActionConstants";
 
 
 class CheckInForm extends React.Component{
     constructor(props, context) {
         super(props, context);
         this.state={
-            guestsBirth: [],
-            guestsName: [],
+            guests:{
+                bornAt:[],
+                name:[]
+            },
             arrival:0,
             leave:0,
-            roomNumber:0,
+            roomNumber:"",
         }
 
         this.formOnChange = this.formOnChange.bind(this);
@@ -21,16 +26,17 @@ class CheckInForm extends React.Component{
         this.setState({[name] : value});
     }
 
+
+
+
     addGuest(e){
         e.preventDefault();
-        const newItem = this.newItem.value;
-        const newBirth = this.newBirth.value;
 
         this.setState({
-            guestsName: [...this.state.guestsName, newItem]
-        })
-        this.setState({
-            guestsBirth: [...this.state.guestsBirth, newBirth]
+            guests: {
+                bornAt:[...this.state.guests.bornAt, this.newBirth.value],
+                name:[...this.state.guests.name, this.newItem.value]
+            }
         })
 
         this.addForm.reset();
@@ -38,42 +44,40 @@ class CheckInForm extends React.Component{
 
 
     render() {
-        const {guestsName} = this.state;
-        const {guestsBirth} = this.state;
         return(
+            console.log(this.state),
             <div>
                 <form ref={(input) => {this.addForm = input}} onSubmit={(e) => {this.addGuest(e)}}>
                     <div className={"form-group form-control-md"}>
                         <h2>Guest</h2>
                         <label htmlFor={"guestBirth"}>Date of birth</label>
-                        <input ref={(inputBirth) => {this.newBirth = inputBirth}} className={"form-control"} type={"number"} id={"guestBirth"} name={"guestBirth"} required min={1900} max={new Date().getFullYear()}/>
+                        <input ref={(inputBirth) => {this.newBirth = inputBirth}} className={"form-control"} type={"date"} id={"bornAt"} name={"bornAt"} required min={1900} max={new Date().getFullYear()}/>
 
                         <label htmlFor={"guestName"}>Name</label>
-                        <input ref={(inputName) => {this.newItem = inputName}} className={"form-control"} type={"text"} id={"guestName"} name={"guestName"}  required/>
+                        <input ref={(inputName) => {this.newItem = inputName}} className={"form-control"} type={"text"} id={"name"} name={"name"}  required/>
                     </div>
                     <button type="submit" className={["btn btn-secondary"]} >Add new guest</button>
                 </form>
                 <div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date of birth</th>
-                                <th>Name</th>
-                            </tr>
+                        <tr>
+                            <th>Date of birth</th>
+                            <th>Name</th>
+                        </tr>
                         </thead>
-                            <tbody>
-                                {this.state.guestsBirth.map(item =>{return(
-                                    <tr>
-                                        <th scope={"row"}>.</th>
-                                        <td key={item}>{item}</td>
-                                        {this.state.guestsName.map(item2 => {return(
-                                            <td key={item2}>{item2}</td>
-                                        )})}
-                                    </tr>
-                                )})}
-                            </tbody>
-                        </table>
+                        <tbody>
+                        {this.state.guests.bornAt.map((item,maini) =>{return(
+                            <tr>
+                                <td key={item}>{item}</td>
+                                {this.state.guests.name.map((item2, i,a) => {
+                                if (maini === i) {
+                                    return (<td key={a[i]}> {item2}</td>)
+                                }})}
+                            </tr>
+                        )})}
+                        </tbody>
+                    </table>
                     </div>
                 <form>
                     <ErrorMessageWell/>
@@ -88,9 +92,13 @@ class CheckInForm extends React.Component{
                     </div>
 
                     <label htmlFor={"RoomNumber"}>Room number</label>
-                    <input className={"form-control"} type={"number"} id={"RoomNumber"} name={"RoomNumber"} />
+
+                    <input className={"form-control"} type={"text"} id={"roomNumber"} name={"roomNumber"} value={this.state.roomNumber} onChange={this.formOnChange}/>
+
                     
-                    <button className={["btn btn-primary"]} onClick={()=> actions.checkIn(this.state.arrival, this.state.leave, this.state.roomNumber)}>Submit</button>
+                    <button className={["btn btn-primary"]}
+                            onClick={()=> actions.checkIn(this.state
+                                                        )}>Submit</button>
                 </form>
             </div>
         );

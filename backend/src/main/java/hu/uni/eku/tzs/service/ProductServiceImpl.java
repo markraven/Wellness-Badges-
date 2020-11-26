@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
                         new Restriction(0,
                                 productServiceDto.getRestDesc(),
                                 productServiceDto.getMinAge(),
-                                productServiceDto.getErrorMessage()
+                                productServiceDto.getErrorMessage() != null ? productServiceDto.getErrorMessage() : String.format("Nem érte el a minimum kort %d", productServiceDto.getMinAge())
                         )
                 ));
         ProductsServices productsServices = new ProductsServices();

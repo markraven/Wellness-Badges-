@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface GuestService {
 
-    Guest addGuest(CheckInGuest guest);
+//    Guest addGuest(CheckInGuest guest);
 
     List<GuestDto> getGeusts();
 

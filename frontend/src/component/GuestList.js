@@ -1,37 +1,47 @@
 import React from 'react';
 import {default as store} from '../store/GuestStore'
-import GuestListItem from "./GuestListItem";
-import * as actions from '../action/HotelActions';
+import axios from "axios";
 class GuestList extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {guests : []};
+        this.state = {
+            guests : [],
+            selected:""
+        };
         this._updateState = this._updateState.bind(this);
     }
 
-
     componentDidMount() {
-        store.addChangeListener(this._updateState);
+            axios.get('/hotel/guests').then(res=>
+            this.setState({
+                guests:res.data
+            }))
     }
-
 
     componentWillUnmount() {
         store.removeChangeListener(this._updateState);
     }
 
     _updateState(){
-        this.setState({guests : store._complexNumbers});
+        this.setState({guests : store._gueststore});
+    }
+
+    getSelected(e, id){
+        e.preventDefault();
+        this.state.selected = "";
+        this.setState({
+            selected: id
+        })
     }
 
     render() {
         return(
-            <select onClick={()=> actions.getAllGuest()} >
-                {this.state.guests.map(({id,bornAt,name}, index)=>{
-                    return(
-                        <GuestListItem key={index} id={id} bornAt={bornAt} name={name} />
-                    );
-                })}
+            <select>
+                <option>SELECT</option>
+                {this.state.guests.map(guest=> 
+                <option onClick={(e) => {this.getSelected(e,guest.guestId)}} id={"selected"} name={"selected"} value={guest.id}>{guest.bornAt}, {guest.guestName}</option>
+                )}
             </select>
         );
     }
