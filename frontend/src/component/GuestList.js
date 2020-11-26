@@ -5,7 +5,10 @@ class GuestList extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {guests : []};
+        this.state = {
+            guests : [],
+            selected:""
+        };
         this._updateState = this._updateState.bind(this);
     }
 
@@ -24,10 +27,21 @@ class GuestList extends React.Component{
         this.setState({guests : store._gueststore});
     }
 
+    getSelected(e, id){
+        e.preventDefault();
+        this.state.selected = "";
+        this.setState({
+            selected: id
+        })
+    }
+
     render() {
         return(
-            <select className={"custom_select"} >
-                {this.state.guests.map(guest=> <option>{guest.guestId}, {guest.bornAt}, {guest.guestName}</option>)}
+            <select>
+                <option>SELECT</option>
+                {this.state.guests.map(guest=> 
+                <option onClick={(e) => {this.getSelected(e,guest.guestId)}} id={"selected"} name={"selected"} value={guest.id}>{guest.bornAt}, {guest.guestName}</option>
+                )}
             </select>
         );
     }
