@@ -43,10 +43,16 @@ export const bookRoom=({arrival,guest,leave})=>{
     });
 }
 
-export const checkIn = ({arrival, leave, roomNumber}) =>{
+export const checkIn = ({arrival, leave, roomNumber,guests}) =>{
+    console.log(guests.name);
+
     axios.post('/hotel/check-in',
     {
         arrival: arrival,
+        guests: {
+            bornAt: guests.bornAt,
+            name: guests.name
+        },
         leave: leave,
         roomNumber: roomNumber
     }
