@@ -19,10 +19,10 @@ public class GuestServiceImpl implements GuestService {
 
     private final GuestRepository repository;
 
-    @Override
+/*    @Override
     public Guest addGuest(CheckInGuest guest) {
         return this.createGuestFromDto(guest);
-    }
+    }*/
 
     @Override
     public List<GuestDto> getGeusts() {
@@ -39,10 +39,10 @@ public class GuestServiceImpl implements GuestService {
         return repository.findAllByReservationId(reservationId);
     }
 
-    private Guest createGuestFromDto(CheckInGuest checkInGuest) {
+/*    private Guest createGuestFromDto(CheckInGuest checkInGuest) {
         Guest guest = new Guest();
         guest.setName(checkInGuest.getName());
         guest.setBornAt(checkInGuest.getBornAt());
         return repository.save(guest);
-    }
+    }*/
 }

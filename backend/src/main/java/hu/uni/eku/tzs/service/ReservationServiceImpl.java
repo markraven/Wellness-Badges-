@@ -13,9 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,8 +54,12 @@ public class ReservationServiceImpl implements ReservationService {
         Room room = roomService.findRoomByRoomNumber(reservation.getRoomNumber()).orElseThrow(ReservationNotFoundException::new);
         Reservation checkInReservation = reservationRepository.findByArriveDateAndLeaveDateAndRoom(reservation.getArrival(), reservation.getLeave(), room).orElseThrow((ReservationNotFoundException::new));
 
-        Set<Guest> guestEntities = reservation.getGuests().stream().map(guestService::addGuest).collect(Collectors.toSet());
-        guestEntities.stream().forEach(g -> g.setReservation(checkInReservation));
+        Set<Guest> guestEntities = new HashSet<>();
+        for (int j = 0; j < reservation.getGuests().getBornAt().size(); j++) {
+            guestEntities.add(new Guest(UUID.randomUUID(), reservation.getGuests().getName().get(j), reservation.getGuests().getBornAt().get(j), checkInReservation));
+        }
+        //Set<Guest> guestEntities = reservation.getGuests().stream().map(guestService::addGuest).collect(Collectors.toSet());
+        //guestEntities.stream().forEach(g -> g.setReservation(checkInReservation));
         checkInReservation.setGuests(guestEntities);
         reservationRepository.save(checkInReservation);
         return guestEntities.stream().map(Guest::toGuestDto).collect(Collectors.toSet());

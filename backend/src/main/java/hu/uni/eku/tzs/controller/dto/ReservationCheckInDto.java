@@ -20,5 +20,5 @@ public class ReservationCheckInDto {
     @ApiModelProperty(required = true, example = "202")
     private String roomNumber;
 
-    private Set<CheckInGuest> guests;
+    private CheckInGuest guests;
 }
