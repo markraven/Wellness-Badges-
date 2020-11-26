@@ -92,7 +92,9 @@ class CheckInForm extends React.Component{
                     </div>
 
                     <label htmlFor={"RoomNumber"}>Room number</label>
+
                     <input className={"form-control"} type={"text"} id={"roomNumber"} name={"roomNumber"} value={this.state.roomNumber} onChange={this.formOnChange}/>
+
                     
                     <button className={["btn btn-primary"]}
                             onClick={()=> actions.checkIn(this.state
