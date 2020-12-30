@@ -7,6 +7,7 @@
 |Verzió|Szerző|Dátum|Státusz|Megjegyzés|
 | - | - | - | - | - |
 |0.1|Fekete Szabolcs|2020-12-30|Előterjesztés|Legelső verzió|
+|0.2|Nagy Szabolcs Máté|2020-12-30|Előterjesztés|Csoportgyűlések részletezése|
 
 Státusz osztályozás:
 
@@ -50,10 +51,45 @@ Google Chrome 87.4280.88 (64bit)
 ### Bakos Bence saját munkaállomása:
 
 ### Nagy Szabolcs Máté saját munkaállomása:
+Windows 10 Enterprise 64bites
+
+Intel i5 8600K 3.60GHz
+
+Asus Nvidia GeForce 1050 TI 6GB
+
+16GB Ram
+
+Opera GX LVL 2(72.0.3815) (64bit)
 
 ## **Rizikómenedzsment**
 # **Jelentések**
 ## **Munka menedzsment**
 A munkát Holló Márk menedzseli. A menedzser feladatai: állandó kapcsolattartás a csapattagok között online (Discord) formába és kommunikáció a megrendelő között. A megrendelővel a kommunikáció e-mail-en vagy discordon keresztül történik. A menedzser további feladatai közé tartozik, hogy biztosítja a kapcsolatot két csapattag között is, valamint folyamatosan tájékozódnia kell, hogy az adott csapattag, hogy áll a számára kiadott feladattal.
 ## **Csoportgyűlések**
+Első csoportgyűlés:
+		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+		Megbeszélés helye: Online, discordon keresztül, 2020.09.28.
+		A megkapott feladat megbeszélése, átgondolása
+ 
+
+Második csoportgyűlés
+		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+		Megbeszélés helye: Online, discordon keresztül, 2020.10.12.
+		Plant uml és dokumentáció átbeszélése, további feladatok kiosztása
+
+Harmadik csoportgyűlés
+		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+		Megbeszélés helye: Online, discordon keresztül, 2020.11.16.
+		Frontend feladatok megbeszélése, kiosztása.
+
+Harmadik csoportgyűlés
+		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+		Megbeszélés helye: Online, discordon keresztül, 2020.11.23.
+		Felmerülő gondok, problémák közös megbeszélése és megoldás keresése.
+
+Negyedik csportgyűlés
+		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+		Megbeszélés helye: Online, discordon keresztül, 2020.11.30.
+		Végső simítások, buggok megbeszélése és javítása
+
 
