@@ -67,29 +67,28 @@ Opera GX LVL 2(72.0.3815) (64bit)
 A munkát Holló Márk menedzseli. A menedzser feladatai: állandó kapcsolattartás a csapattagok között online (Discord) formába és kommunikáció a megrendelő között. A megrendelővel a kommunikáció e-mail-en vagy discordon keresztül történik. A menedzser további feladatai közé tartozik, hogy biztosítja a kapcsolatot két csapattag között is, valamint folyamatosan tájékozódnia kell, hogy az adott csapattag, hogy áll a számára kiadott feladattal.
 ## **Csoportgyűlések**
 Első csoportgyűlés:
-		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
-		Megbeszélés helye: Online, discordon keresztül, 2020.09.28.
-		A megkapott feladat megbeszélése, átgondolása
- 
+Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+Megbeszélés helye: Online, discordon keresztül, 2020.09.28.
+A megkapott feladat megbeszélése, átgondolása
 
 Második csoportgyűlés
-		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
-		Megbeszélés helye: Online, discordon keresztül, 2020.10.12.
-		Plant uml és dokumentáció átbeszélése, további feladatok kiosztása
+Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+Megbeszélés helye: Online, discordon keresztül, 2020.10.12.
+Plant uml és dokumentáció átbeszélése, további feladatok kiosztása
 
 Harmadik csoportgyűlés
-		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
-		Megbeszélés helye: Online, discordon keresztül, 2020.11.16.
-		Frontend feladatok megbeszélése, kiosztása.
+Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+Megbeszélés helye: Online, discordon keresztül, 2020.11.16.
+Frontend feladatok megbeszélése, kiosztása.
 
-Harmadik csoportgyűlés
-		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
-		Megbeszélés helye: Online, discordon keresztül, 2020.11.23.
-		Felmerülő gondok, problémák közös megbeszélése és megoldás keresése.
+Negyedik csoportgyűlés
+Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+Megbeszélés helye: Online, discordon keresztül, 2020.11.23.
+Felmerülő gondok, problémák közös megbeszélése és megoldás keresése.
 
-Negyedik csportgyűlés
-		Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
-		Megbeszélés helye: Online, discordon keresztül, 2020.11.30.
-		Végső simítások, buggok megbeszélése és javítása
+Ötödik csportgyűlés
+Jelenlévők: Holló Márk, Bakos Bence, Nagy Szabolcs Máté, Fekete Szabolcs
+Megbeszélés helye: Online, discordon keresztül, 2020.11.30.
+Végső simítások, buggok megbeszélése és javítása
 
 
