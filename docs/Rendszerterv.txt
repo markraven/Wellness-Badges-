@@ -1,0 +1,90 @@
+-----------------------------
+BEVEZETÉS
+-----------------------------
+
+A dokumentum Holló Márk, Nagy Szabolcs Máté, Fekete Szabolcs, Bakos Bence közös projektje
+keretein belül létrejött szoftvert specifikálja.
+
+-----------------------------
+A RENDSZER CÉLJA
+-----------------------------
+A szoftver egy megrendelő által kért alkalmazás.
+
+-----------------------------
+ÜTEMTERV
+-----------------------------
+
+Az ügyfélell való konzultációk:
+	2020-09-21-től 2020-12-17-ig Heti rendszerességgel szerda 13:00-kor.
+
+-----------------------------
+MÉRFÖLDKÖVEK
+-----------------------------
+
+1, Kezelő felület:
+
+-A szállodában dolgozó egyszerűen tudjon adatokat lekérni illetve felvinni az adatbázisba.
+
+-A felület webes megoldása
+2, Órák
+
+-Az órák elkészítése: fizetőképesség, üzenet megjelenítés
+
+-Ha egy termék korhatárhoz van kötve és az óra felhasználója nem felel meg, 
+akkor ne tudjun vásárlást illetve szolgáltatás ingénybevételét végezni.
+
+3, Visszajelzések
+
+-A szállodákban dolgozók és az óra felhasználójának visszejelzést küldjön a rendszer, 
+ha az órával az adott helyen történt érintés és azokról a szükséges információkat jelenítse meg.
+
+
+AZ ALKALMAZÁS ÁLTALÁNOS KÖVETELMÉNYEI
+
+------------------------------
+Nem funkcionális követelmények
+------------------------------
+
+- Egyszerű, minimalista téma/design
+- Akadálymentes felület biztosítása
+- Klasszikus grafikus felület
+
+Támogatott eszközök:
+
+Platform független.
+
+
+Hibakezelés:
+
+Az alkalmazás használata közben felmerülő hibák:
+1. Internet vagy belső hálózat nélkül, az adatbázis nem elérhető.
+
+2. nem kezelt belső program hiba
+    - A felhasználónak lehetősége van a verziókezelő rendszerben tájékoztatni a fejlesztőket a hibáról
+
+
+---------------------------
+FIZIKAI KÖRNYEZET
+--------------------------
+A webes alkalmazás háttere (backend) a Java alpaján fut.
+
+-----------------
+TESZTTERV
+-----------------
+
+A tesztelési tervet, egyénileg készítette mindenki.
+
+
+-------------------------
+TELEPÍTÉSI TERV
+------------------------
+
+A webes alkalmazás telepítés nélkül futtatható, bármely webböngészőn keresztül, belső hálózaton.
+
+--------------------------------
+KARBANTARTÁSI TERV
+-------------------------------
+
+A webes alkalmazás minimális karbantartást igényel, amely a következőkre bontható:
+- Ellenőrizni kell, hogy a jövőben kiadott böngésző frissítésekkel műkődőképes marad-e.
+- A szerver folyamatos karbantartása és megfelelő kezelése.
